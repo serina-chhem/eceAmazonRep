@@ -16,6 +16,7 @@ if($db_found){
 	$result = mysqli_query($db_handle, $sql);
 	while($data = mysqli_fetch_assoc($result)){
 		?>
+		<img src="admin/imgs/<?php echo $data["title"];?>.jpg">
 		<h2><?php echo $data["title"];?></h2>
 		<h5><?php echo $data["description"];?></h5><br/>
 		<h4><?php echo $data["price"];?> EUR</h4><br/>
