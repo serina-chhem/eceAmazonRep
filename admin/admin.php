@@ -2,11 +2,21 @@
 session_start();
 
 
+?>
+<link href="style/bootstrap.css" type="text/css" rel="stylesheet"/>
+<h1>Bienvenue, <?php echo $_SESSION['username']; ?></h1>
+</br>
+<a href="?action=add">Ajouter un produits </a>
+<a href="?action=modifyanddelete">Modifier ou supprimer un produits</a><br><br>
+
+<?php
+
+
 
 if (isset($_SESSION['username'])) {
 
 	?>
-	<h1>Bienvenue, <?php echo $_SESSION['username']; ?></h1>
+	
 
 	<?php
 	if(isset($_GET['action'])){
@@ -22,14 +32,30 @@ if($_GET['action']=='add'){
 
 if($title&&$description&&$price){
 
-$bdd=mysql_connect('localhost','root','');
+/*$bdd=mysql_connect('localhost','root','');
 mysql_select_db('eceAmazon',$bdd); 
 
 $sql = "INSERT INTO products VALUES('','$title','$description','$price')";
-mysql_query($sql);
+mysql_query($sql);*/
+
+$database = "eceAmazon"; 
 
 
-mysql_close();
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+
+$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
+
+if($db_found){
+
+	$sql = "INSERT INTO products VALUES('','$title','$description','$price')";
+	$result = mysqli_query($db_handle, $sql);
+}
+	else {
+	echo "Database not found";
+}
+
+
+mysqli_close($db_handle);
 
 echo "produit ajouté";
 
@@ -42,7 +68,7 @@ echo "produit ajouté";
 ?>
 <form action="" method="post">
 	<h3>Nom du produit :</h3><input type="text" name="title">
-	<h3>Desciption :</h3><input type="text" name="description">
+	<h3>Desciption :</h3><textarea  name="description"></textarea>
 	<h3>Prix :</h3><input type="text" name="price"><br><br>
 	<input type="submit" name="submit"/>
 
@@ -86,6 +112,66 @@ mysqli_close($db_handle);
 
 
 }else if($_GET['action']=='modify'){
+
+	$database = "eceAmazon"; 
+
+
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+
+$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
+
+if($db_found){
+
+
+
+	$id=$_GET['id'];
+	$sql = "SELECT * from products WHERE id=$id";
+	$result = mysqli_query($db_handle, $sql);
+	$data = mysqli_fetch_assoc($result);
+
+
+
+	
+}
+
+
+
+
+
+
+	?>
+	<form action="" method="post">
+	<h3>Nom du produit :</h3><input value="<?php echo $data["title"];?>"" type="text" name="title">
+	<h3>Desciption :</h3><textarea name="description"><?php echo $data["description"];?>  </textarea>
+	<h3>Prix :</h3><input value="<?php echo $data["price"];?>" name="price"><br><br>
+	<input type="submit" name="submit" value="Modifier" />
+
+</form>
+
+
+
+	<?php
+
+	if (isset($_POST['submit'])) {
+
+		$title=$_POST['title'];
+		$description=$_POST['description'];
+		$price=$_POST['price'];
+
+		$update="UPDATE products SET title='$title',description='$description',price='$price' WHERE id=$id";
+		$result2 = mysqli_query($db_handle, $update);
+
+		header('Location: admin.php?action=modifyanddelete');
+	}
+
+
+
+
+	else {
+	echo "Database not found";
+}
+
+mysqli_close($db_handle);
 
 
 }else if($_GET['action']=='delete'){
@@ -137,11 +223,7 @@ mysqli_close($db_handle);
 ?>
 
 
-<link href="style/bootstrap.css" type="text/css" rel="stylesheet"/>
-<h1>Bienvenue, <?php echo $_SESSION['username']; ?></h1>
-</br>
-<a href="?action=add">Ajouter un produits</a>
-<a href="?action=modifyanddelete">Modifier ou supprimer un produits</a>
+
 <br><br><br>
 <a href="../index.php">Retour site</a>
 

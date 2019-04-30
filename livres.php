@@ -17,7 +17,9 @@ if($db_found){
 	while($data = mysqli_fetch_assoc($result)){
 		?>
 		<h2><?php echo $data["title"];?></h2>
-		
+		<h5><?php echo $data["description"];?></h5><br/>
+		<h4><?php echo $data["price"];?> EUR</h4><br/>
+		<br/><br/>
 		
 		<?php
 	}
