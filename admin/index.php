@@ -36,4 +36,6 @@ if(isset($_POST['submit']))
 	<h3>Mot de Passe :</h3><input type="password" name="password"/><br/><br/>
 	<input type="submit" name="submit"/><br/><br/>
 </form>
+<br/><br/>
+<a href="../index.php">Retour site</a>
 

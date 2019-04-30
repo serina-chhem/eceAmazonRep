@@ -23,7 +23,7 @@ if($_GET['action']=='add'){
 if($title&&$description&&$price){
 
 $bdd=mysql_connect('localhost','root','');
-mysql_select_db('bdd1',$bdd); 
+mysql_select_db('eceAmazon',$bdd); 
 
 $sql = "INSERT INTO products VALUES('','$title','$description','$price')";
 mysql_query($sql);
@@ -50,27 +50,69 @@ echo "produit ajouté";
 
 <?php
 
-/*}else if($_GET['action']=='modifyanddelete'){
+}else if($_GET['action']=='modifyanddelete'){
 
-$bdd=mysql_connect('localhost','root','');
-mysql_select_db('bdd1',$bdd); 
+$database = "eceAmazon"; 
 
-$sql = "SELECT * FROM products";
-mysql_query($sql);
 
-while($s = mysqli_fetch_assoc($bdd)){
-	echo $s- >$title '<br/>';
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+
+$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
+
+if($db_found){
+
+	$sql = "SELECT * from products";
+	$result = mysqli_query($db_handle, $sql);
+	while($data = mysqli_fetch_assoc($result)){
+
+		
+		echo "produit:".$data['title'].'<br>';
+		?>
+		<a href="?action=modify&amp;id=<?php echo $data["id"]; ?>">Modifier</a>
+		<a href="?action=delete&amp;id=<?php echo $data["id"]; ?>">Supprimer</a> <br><br>
+		<?php
+		
+	}
 }
 
+else {
+	echo "Database not found";
+}
 
-mysql_close();*/
+mysqli_close($db_handle);
+
+
 
 
 
 }else if($_GET['action']=='modify'){
 
 
-}else if($_GET['action']=='delete()'){
+}else if($_GET['action']=='delete'){
+
+	$database = "eceAmazon"; 
+
+
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+
+$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
+
+if($db_found){
+
+	$id=$_GET['id'];
+	$sql = "DELETE FROM products WHERE id=$id";
+	$result = mysqli_query($db_handle, $sql);
+	
+}
+
+else {
+	echo "Database not found";
+}
+
+mysqli_close($db_handle);
+
+
+
 
 
 }else{
@@ -100,5 +142,6 @@ mysql_close();*/
 </br>
 <a href="?action=add">Ajouter un produits</a>
 <a href="?action=modifyanddelete">Modifier ou supprimer un produits</a>
-
+<br><br><br>
+<a href="../index.php">Retour site</a>
 
