@@ -15,9 +15,9 @@ session_start();
 			<li><a href="">Categories</a>
 				<ul>
 					<li><a href="livres.php">Livres</a></li>
-					<li><a href="includes/musique.php">Musique</a></li>
-					<li><a href="includes/vetements.php">Vetements</a></li>
-					<li><a href="includes/sportsEtLoisir.php">Sports et Loisir</a></li>
+					<li><a href="musique.php">Musique</a></li>
+					<li><a href="vetements.php">Vetements</a></li>
+					<li><a href="sportsEtLoisir.php">Sports et Loisir</a></li>
 				</ul>
 			</li>
 			<li><a href="ventesFlash.php">Ventes Flash</a></li>

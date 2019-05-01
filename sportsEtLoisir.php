@@ -43,7 +43,7 @@ if($db_found){
 
 
 	
-	$sql = "SELECT * from products WHERE category='livres'";
+	$sql = "SELECT * from products WHERE category='sportsEtLoisir'";
 	$result = mysqli_query($db_handle, $sql);
 
 

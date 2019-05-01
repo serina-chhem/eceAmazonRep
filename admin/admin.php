@@ -6,8 +6,8 @@ session_start();
 <link href="style/bootstrap.css" type="text/css" rel="stylesheet"/>
 <h1>Bienvenue, <?php echo $_SESSION['username']; ?></h1>
 </br>
-<a href="?action=add">Ajouter un produits </a>
-<a href="?action=modifyanddelete">Modifier ou supprimer un produits</a><br><br>
+<a href="?action=add">    Ajouter un produits </a>											
+<a href="?action=modifyanddelete">      Modifier ou supprimer un produits</a><br><br>
 
 <?php
 
@@ -23,11 +23,12 @@ if (isset($_SESSION['username'])) {
 
 if($_GET['action']=='add'){
 
-	if(isset($_POST['submit'])){
+	if(isset($_POST['submit'])){          /*Récupération des infos du formulaire pour ajouter un produit*/   
 
 		$title=$_POST['title'];
 		$description=$_POST['description'];
 		$price=$_POST['price'];
+		$category=$_POST['category'];
 		$img=$_FILES['img']['name'];
 		$img_tmp = $_FILES['img']['tmp_name'];
 
@@ -70,13 +71,9 @@ if($_GET['action']=='add'){
 
 
 
-if($title&&$description&&$price){
+ if($title&&$description&&$price&&$category){      /*si tous les champs sont remplis, alors requete pour envoyer les infos dans la bdd*/
 
-/*$bdd=mysql_connect('localhost','root','');
-mysql_select_db('eceAmazon',$bdd); 
 
-$sql = "INSERT INTO products VALUES('','$title','$description','$price')";
-mysql_query($sql);*/
 
 $database = "eceAmazon"; 
 
@@ -87,7 +84,7 @@ $db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection
 
 if($db_found){
 
-	$sql = "INSERT INTO products VALUES('','$title','$description','$price')";
+	$sql = "INSERT INTO products VALUES('','$title','$description','$price','$category')";
 	$result = mysqli_query($db_handle, $sql);
 }
 	else {
@@ -106,18 +103,61 @@ echo "produit ajouté";
 
 }
 ?>
-<form action="" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data">      <!--Formulaire pour ajouter un produit -->
 	<h3>Nom du produit :</h3><input type="text" name="title">
 	<h3>Desciption :</h3><textarea  name="description"></textarea>
 	<h3>Prix :</h3><input type="text" name="price"><br><br>
+	<h3>Image :</h3>
 	<input type="file" name="img"><br><br><br><br>
+	<h3>Categorie :</h3><select name="category">
+		<?php 
+
+$database = "eceAmazon"; 
+
+
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+
+$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
+
+if($db_found){
+
+	$sql = "SELECT * from category";
+	$result = mysqli_query($db_handle, $sql);
+	while($data = mysqli_fetch_assoc($result)){
+
+		?>
+		<option><?php echo $data['name'];?></option>
+
+		
+		<?php
+		
+	}
+}
+
+else {
+	echo "Database not found";
+}
+
+mysqli_close($db_handle);
+
+
+
+?>
+
+
+	</select><br><br>
+
+
+
+
+
 	<input type="submit" name="submit"/>
 
 </form>
 
 <?php
 
-}else if($_GET['action']=='modifyanddelete'){
+}else if($_GET['action']=='modifyanddelete'){    /*redirige sur une page affichant les produits et les options permettant de modifier ou supprimer un produit*/
 
 $database = "eceAmazon"; 
 
@@ -152,7 +192,7 @@ mysqli_close($db_handle);
 
 
 
-}else if($_GET['action']=='modify'){
+}else if($_GET['action']=='modify'){     /*Modifier un produit de la bdd*/
 
 	$database = "eceAmazon"; 
 
@@ -215,7 +255,7 @@ if($db_found){
 mysqli_close($db_handle);
 
 
-}else if($_GET['action']=='delete'){
+}else if($_GET['action']=='delete'){         /*Supprimer un produit du site*/
 
 	$database = "eceAmazon"; 
 
