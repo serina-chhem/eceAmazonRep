@@ -8,6 +8,89 @@ header h1{	font-family: Segoe UI, sans-serif;}
 	color: white;
 }
 
+.texte{	text-align: center;
+		font-family: Segoe UI, sans-serif;}
+
+.texte a{text-decoration: none;}
+
+.texte h3{color: #007179;}
+
+.texte h4{color: red;}
+
+.texte-2{	text-align: left;
+			font-family: Segoe UI, sans-serif;
+			padding: 0;}
+
+.texte-2 a{text-decoration: none;}
+
+.texte-2 h2{color: #007179;}
+
+.texte-2 h3{color: black;}
+
+.texte-2 h4{color: #007179;}
+
+.texte-2 h5{color: black;}
+
+.texte-3{	text-align: left;
+			font-family: Segoe UI, sans-serif;}
+
+.texte-3 h2{color: #007179;}
+
+.texte-3 h3{color: #007179;}
+
+.texte-3 h4{color: #007179;}
+
+.bouton-case{
+	background-color: #007179;
+	margin: 10 auto;
+	padding: 1px;
+	width: 330px;
+	text-align: center;
+	font-family: Segoe UI, sans-serif;}
+
+.bouton-case a{
+	text-decoration: none;
+	color: white;}
+
+.bouton-mot a{
+	text-decoration: none;
+	font-family: Segoe UI, sans-serif;
+	color: #007179;}
+
+.retour{
+	background-color: white;
+	margin: 0 0;
+	padding: 10px;
+	width: 120px;
+	text-align: center;
+	font-family: Segoe UI, sans-serif;}
+
+.retour a{
+	text-decoration: none;
+	color: #007179;}
+
+.bloc {
+    padding: 0px;
+    margin: 0 auto;
+    text-align: center;
+	font-family: Segoe UI, sans-serif;}
+
+/* Onglets du menu */
+.bloc li {
+    display: inline-block;
+	padding-right: 10px;
+	text-align: center;
+	background-color: white;}
+
+.bloc-2 {
+    padding: 0px;
+    margin: 0 auto;
+    text-align: left;
+	font-family: Segoe UI, sans-serif;}
+
+.bloc-2 h3{color: #007179;}
+
+.bloc-2 h4{color: #007179;}
 
 #menu {
     padding: 0px;
@@ -34,13 +117,13 @@ header h1{	font-family: Segoe UI, sans-serif;}
     left: -999em;
     text-align: left;
     z-index: 1000;
-	padding: 0px;
-    margin: 0px;}
+	padding: 10px;
+    margin: 0px -10px;}
 
 /* Elements de la liste déroulante */    
 #menu ul li {
     display: inherit;
-	margin: 10px -10px;
+	margin: 0px -10px;
 	padding: 10px;
 	width: 110px;
 	text-align: left;
@@ -74,7 +157,7 @@ header h1{	font-family: Segoe UI, sans-serif;}
 #menu li:hover ul li:hover a{
     color: white;}
 
-/*http://www.frogweb.fr/menu-deroulant-horizontal/*/
+/* http://www.frogweb.fr/menu-deroulant-horizontal/ */
 
 .sidebar
 {
@@ -93,14 +176,20 @@ header h1{	font-family: Segoe UI, sans-serif;}
 	text-align: center;
 }
 
-.footer
+/* Pied de page */
+footer
 {
 	background-color: #007179;
 	font-family: Segoe UI, sans-serif;
+	position: relative;
+	bottom:0;
+	width: 100%;
+	height: auto;
+	text-align: center;
 }
 
-.footer h5
+footer h5
 {
 	color: white;
-	padding: 10px 40px;
+	padding: 10px;
 }
