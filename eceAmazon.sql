@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 02 mai 2019 à 09:47
+-- Généré le :  jeu. 02 mai 2019 à 15:28
 -- Version du serveur :  10.1.36-MariaDB
 -- Version de PHP :  5.6.38
 
@@ -80,21 +80,21 @@ CREATE TABLE `products` (
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `price` int(11) NOT NULL,
-  `category` varchar(255) NOT NULL
+  `category` varchar(255) NOT NULL,
+  `vendeur` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `products`
 --
 
-INSERT INTO `products` (`id`, `title`, `description`, `price`, `category`) VALUES
-(24, 'julien ', 'rauber', 36, 'musique'),
-(25, 'nicolas', 'dd', 10, 'livres'),
-(26, 'ece', 'school', 9000, 'vetements'),
-(27, 'end', 'game', 10, 'sportsEtLoisir'),
-(28, 'serina', 'na', 100, 'livres'),
-(29, 'test1', 'hfriusfherisughzerp_gvih erdgvz \r\n \r\n uiredfhv \r\n \r\n \r\n \r\n \r\n gzr_dfibhvr \r\n \r\n fuidhvuidsfhbv \r\n \r\n \r\n ueisfdhbvsuifdhvnfuis    ', 10, 'musique'),
-(30, 'les misÃ©rables', 'Du temps du roi Moabdar, il y avait Ã  Babylone un jeune homme nommÃ© Zadig, nÃ© avec un beau naturel fortifiÃ© par lâ€™Ã©ducation. Quoique riche et jeune, il savait modÃ©rer ses passions ; il nâ€™affectait rien ; il ne voulait point toujours avoir raison, et savait respecter la faiblesse des hommes. On Ã©tait Ã©tonnÃ© de voir quâ€™avec beaucoup dâ€™esprit il nâ€™insultÃ¢t jamais par des railleries Ã  ces propos si vagues, si rompus, si tumultueux, Ã  ces mÃ©disances tÃ©mÃ©raires, Ã  ces dÃ©cisions ignorantes, Ã  ces turlupinades grossiÃ¨res, Ã  ce vain bruit de paroles quâ€™on appelait conversation dans Babylone. Il avait appris dans le premier livre de Zoroastre, que lâ€™amour-propre est un ballon gonflÃ© de vent, dont il sort des tempÃªtes quand on lui a fait une piqÃ»re. Zadig surtout ne se vantait pas de mÃ©priser les femmes et de les subjuguer. Il Ã©tait gÃ©nÃ©reux ; il ne craignait point dâ€™obliger des ingrats, suivant ce grand prÃ©cepte de Zoroastre : Quand tu manges, donne Ã  manger aux chiens, dussent-ils te mordre. Il Ã©tait aussi sage quâ€™on peut lâ€™Ãªtre ; car il cherchait Ã  vivre avec des sages. Instruit dans les sciences des anciens ChaldÃ©ens, il nâ€™ignorait pas les principes physiques de la nature, tels quâ€™on les connaissait alors, et savait de la mÃ©taphysique ce quâ€™on en a su dans tous les Ã¢ges, câ€™est-Ã -dire fort peu de chose. Il Ã©tait fermement persuadÃ© que lâ€™annÃ©e Ã©tait de trois cent soixante et cinq jours et un quart, malgrÃ© la nouvelle philosophie de son temps, et que le soleil Ã©tait au centre du monde ; et quand les principaux mages lui disaient, avec une hauteur insultante, quâ€™il avait de mauvais sentiments, et que câ€™Ã©tait Ãªtre ennemi de lâ€™Ã‰tat que de croire que le soleil tournait sur lui-mÃªme, et que lâ€™annÃ©e avait douze mois, il se taisait sans colÃ¨re et sans dÃ©dain.', 10, 'livres');
+INSERT INTO `products` (`id`, `title`, `description`, `price`, `category`, `vendeur`) VALUES
+(41, 'julien ', 'baraya', 1, 'musique', 'admin'),
+(42, 'paulolap', 'blabla', 100, 'livres', 'admin'),
+(44, 'test', 'blabla', 10, 'vetements', 'admin'),
+(45, 'testo', 'blabla', 10, 'sportsEtLoisir', 'sire'),
+(46, 'nicolas', 'blabla', 10, 'musique', 'admin'),
+(47, 'polo', 'polochon  ahahahha        ', 2, 'livres', 'paul');
 
 -- --------------------------------------------------------
 
@@ -103,21 +103,23 @@ INSERT INTO `products` (`id`, `title`, `description`, `price`, `category`) VALUE
 --
 
 CREATE TABLE `vendeur` (
-  `Login` varchar(255) NOT NULL,
-  `Nom` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `Photo` varchar(255) NOT NULL,
-  `imageFond` varchar(255) NOT NULL
+  `id` int(11) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `pseudo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `vendeur`
 --
 
-INSERT INTO `vendeur` (`Login`, `Nom`, `Password`, `Photo`, `imageFond`) VALUES
-('julien.delgay@edu.ece.fr', 'Julien', 'JulienD1234', 'photoJulienD.jpg', 'photoImageFondJulienD.jpg'),
-('raphael.daici@edu.ece.fr', 'Raphael', 'Raph1234', 'photoRaph.jpg', 'photoImageFondRaph.jpg'),
-('sawsane.aloui@edu.ece.fr', 'Sawsane', 'Saw1234', 'photoSaw.jpg', 'photoImageFondSaw.jpg');
+INSERT INTO `vendeur` (`id`, `login`, `nom`, `password`, `pseudo`) VALUES
+(1, 'bonjour@ece.fr', 'bonjour', 'bonjour', 'bon'),
+(2, 'salut@ece.fr', 'salut', 'salut', 'sal'),
+(3, 'sss', 'serina', 'serinana', 'sire'),
+(4, 'nicolas.dumas-delage@edu.ece.fr', 'serina', 'serinana', 'sire'),
+(5, 'polo@edu.ece.fr', 'paul', 'paul', 'paul');
 
 --
 -- Index pour les tables déchargées
@@ -145,7 +147,7 @@ ALTER TABLE `products`
 -- Index pour la table `vendeur`
 --
 ALTER TABLE `vendeur`
-  ADD PRIMARY KEY (`Login`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -161,7 +163,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT pour la table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT pour la table `vendeur`
+--
+ALTER TABLE `vendeur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

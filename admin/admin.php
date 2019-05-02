@@ -6,8 +6,10 @@ session_start();
 <link href="style/bootstrap.css" type="text/css" rel="stylesheet"/>
 <h1>Bienvenue, <?php echo $_SESSION['username']; ?></h1>
 </br>
-<a href="?action=add">    Ajouter un produits </a>											
+<a href="?action=add">    Ajouter un produits </a></br></br>											
 <a href="?action=modifyanddelete">      Modifier ou supprimer un produits</a><br><br>
+<a href="?action=deletevendeur">  Supprimer un vendeur</a><br><br>
+
 
 <?php
 
@@ -31,6 +33,7 @@ if($_GET['action']=='add'){
 		$category=$_POST['category'];
 		$img=$_FILES['img']['name'];
 		$img_tmp = $_FILES['img']['tmp_name'];
+		$vendeur=$_SESSION['username'];
 
 		if(!empty($img_tmp)){
 
@@ -84,7 +87,7 @@ $db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection
 
 if($db_found){
 
-	$sql = "INSERT INTO products VALUES('','$title','$description','$price','$category')";
+	$sql = "INSERT INTO products VALUES('','$title','$description','$price','$category','$vendeur')";
 	$result = mysqli_query($db_handle, $sql);
 }
 	else {
@@ -225,9 +228,51 @@ if($db_found){
 	<h3>Nom du produit :</h3><input value="<?php echo $data["title"];?>"" type="text" name="title">
 	<h3>Desciption :</h3><textarea name="description"><?php echo $data["description"];?>  </textarea>
 	<h3>Prix :</h3><input value="<?php echo $data["price"];?>" name="price"><br><br>
+	<input type="file" name="img"><br><br><br><br>
+	<h3>Categorie :</h3><select name="category">
+		<?php 
+
+$database = "eceAmazon"; 
+
+
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+
+$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
+
+if($db_found){
+
+	$sql = "SELECT * from category";
+	$result = mysqli_query($db_handle, $sql);
+	while($data = mysqli_fetch_assoc($result)){
+
+		?>
+		<option><?php echo $data['name'];?></option>
+
+		
+		<?php
+		
+	}
+}
+
+else {
+	echo "Database not found";
+}
+
+mysqli_close($db_handle);
+
+
+
+?>
+
+
+	</select><br><br>
+
+
 	<input type="submit" name="submit" value="Modifier" />
 
 </form>
+
+
 
 
 
@@ -238,9 +283,68 @@ if($db_found){
 		$title=$_POST['title'];
 		$description=$_POST['description'];
 		$price=$_POST['price'];
+		$category=$_POST['category'];
 
-		$update="UPDATE products SET title='$title',description='$description',price='$price' WHERE id=$id";
+
+		$img=$_FILES['img']['name'];
+		$img_tmp = $_FILES['img']['tmp_name'];
+
+		if(!empty($img_tmp)){
+
+			$image=explode('.',$img);
+			$image_ext=end($image);
+
+			if(in_array(strtolower($image_ext), array('png','jpg','jpeg'))==false){
+				echo'Veuillez rentrer une image ayant pour extension : png, jpg, ou jpeg';
+			}else{
+				$image_size=getimagesize($img_tmp);
+				if($image_size['mime']=='image/jpeg'){
+					$image_src=imagecreatefromjpeg($img_tmp);
+				}else if ($image_size['mime']=='image/png') {
+					$image_src=imagecreatefrompng($img_tmp);
+					
+				}else{
+					$image_src=false;
+					echo'Veuillez rentrer une image valide';
+				}
+				if($image_src!==false){
+					$image_width=200;
+					if($image_size[0]==$image_width){
+						$image_finale=$image_src;
+					}else{
+						$new_width[0]=$image_width;
+						$new_height[1]=200;
+						$image_finale=imagecreatetruecolor($new_width[0],$new_height[1]);
+						imagecopyresampled($image_finale, $image_src, 0, 0, 0, 0, $new_width[0], $new_height[1], $image_size[0], $image_size[1]);
+					}
+					imagejpeg($image_finale,'imgs/'.$title.'.jpg');
+				}
+
+			}
+
+		}else {
+			echo 'Veuillez rentrer une image';
+		}
+
+		$database = "eceAmazon"; 
+
+
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+
+$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
+
+if($db_found){
+
+
+		$update="UPDATE products SET title='$title',description='$description',price='$price',category='$category' WHERE id=$id";
 		$result2 = mysqli_query($db_handle, $update);
+}
+
+else {
+	echo "Database not found";
+}
+
+	mysqli_close($db_handle);
 
 		header('Location: admin.php?action=modifyanddelete');
 	}
@@ -248,11 +352,7 @@ if($db_found){
 
 
 
-	else {
-	echo "Database not found";
-}
-
-mysqli_close($db_handle);
+	
 
 
 }else if($_GET['action']=='delete'){         /*Supprimer un produit du site*/
@@ -279,6 +379,62 @@ else {
 mysqli_close($db_handle);
 
 
+}else if($_GET['action']=='deletevendeur'){         /*Supprimer vendeur de la bdd*/
+
+	$database = "eceAmazon"; 
+
+
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+
+$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
+
+if($db_found){
+
+$sql = "SELECT * from vendeur";
+	$result = mysqli_query($db_handle, $sql);
+	while($data = mysqli_fetch_assoc($result)){
+
+		
+		echo "produit:".$data['Nom'].'<br>';
+		?>
+		
+		<a href="?action=delete_v&amp;id=<?php echo $data["id"]; ?>">Supprimer</a> <br><br>
+		<?php
+		
+	}
+
+	
+	
+}
+
+else {
+	echo "Database not found";
+}
+
+mysqli_close($db_handle);
+
+}else if($_GET['action']=='delete_v'){         /*Supprimer un produit du site*/
+
+	$database = "eceAmazon"; 
+
+
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+
+$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
+
+if($db_found){
+
+	$id=$_GET['id'];
+	$sql = "DELETE FROM vendeur WHERE id=$id";
+	$result = mysqli_query($db_handle, $sql);
+	
+}
+
+else {
+	echo "Database not found";
+}
+
+mysqli_close($db_handle);
 
 
 

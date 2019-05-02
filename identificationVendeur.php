@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title> Mon compte Vendeur</title>
-</head>
-
-<!-- <a href="?action=connexion">Se connecter en tant qu'acheteur :  </a> -->
 <div> Se connecter </div>
 <?php
+session_start();
 // if($_GET['action']=='connexion'){
 	if (isset($_POST['Identifier'])){
 		$identifiant = isset($_POST["pseudo"])? $_POST["pseudo"] : "";
@@ -14,25 +8,27 @@
 
 $database = "eceAmazon"; 
 
-$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
+$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
 
 $db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
 
 if($db_found){
 
-	$sql = "SELECT * from Vendeur where Pseudo = '$identifiant' and Password = '$pass' ";
+	$sql = "SELECT * from vendeur where pseudo = '$identifiant' and password = '$pass' ";
 	$result = mysqli_query($db_handle, $sql) or die ("Gros fail");
 //	while(
 		$data = mysqli_fetch_assoc($result);
 //	){
 
-		if ($data['Pseudo'] == $identifiant && $data['Password'] == $pass){
+		if ($data['pseudo'] == $identifiant && $data['password'] == $pass){
 
-		echo "Connexion établie ! Bienvenue ".$data['Nom'].'<br>';
+		echo "Connexion établie ! Bienvenue ".$data['nom'].'<br>';
+		$_SESSION['pseudo']=$identifiant;
+		header('Location: vendeur.php');	
 		
 		}
-		else if ($data['Pseudo'] != $identifiant || $data['Password'] != $pass){
+		else if ($data['pseudo'] != $identifiant || $data['password'] != $pass){
 			echo "Identifiant ou mot de passe incorrect";
 		}
 		
@@ -66,39 +62,41 @@ mysqli_close($db_handle);
 	</table>
 </form>
 
+
+
 <?php
 if (isset($_POST['Inscription'])){
 
-	$newIdentifiant = isset($_POST["newEmail"])? $_POST["newEmail"] : "";
-	$newPass = isset($_POST["newPassword"])? $_POST["newPassword"] : "";
-	$newNom = isset($_POST["newName"])? $_POST["newName"] : "";
-	$pseudo = isset($_POST["newPseudo"])? $_POST["newPseudo"] : "";
- 	$newPhoto = $_FILES["newPic"]['name'];
- 	$newPhotoMur = $_FILES["newPhotoFond"]['name'];
-	
+	$newIdentifiant =$_POST["newEmail"];
+	$newPass = $_POST["newPassword"];
+	$newNom = $_POST["newName"];
+	$pseudo = $_POST["newPseudo"];
+ 
 	if ($newIdentifiant && $newPass && $newNom && $pseudo){
 		
 	$database = "eceAmazon"; 
 
-	$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
+	$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
 
 	$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
 if ($db_found){
 
-$sql = "INSERT INTO Vendeur VALUES('$newIdentifiant' , $pseudo, '$newNom','$newPass','$newPhoto', '$newPhotoMur')";
+$sql = "INSERT INTO vendeur VALUES('','$newIdentifiant','$newNom','$newPass','$pseudo')";
+$result = mysqli_query($db_handle, $sql);
 
-$result1 = mysqli_query($db_handle, $sql) or die ("Gros fail");
 
-echo "Inscription réussie !";
-echo $newPhoto;
 
 }
 else {
 	echo "Base de données non trouvée";
 }
 mysqli_close($db_handle);
+
+echo "Inscription réussie !";
 }
+
+
 
 else {
 	echo "Veuillez remplir tous les champs";
@@ -107,6 +105,20 @@ else {
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div>Créer un compte Vendeur :  </div>
 <form  action="" method="post">
@@ -130,23 +142,18 @@ else {
 		<td> <input type="text" id="newPseudo" name="newPseudo"> </td>
 	</tr>
 	<tr>
-		<td> Importer une photo de profil</td>
+		<!--<td> Importer une photo de profil</td>
 		<td> <input type="file" name="newPic" id="newPic" accept="image/png, image/jpeg, image/jpg"> </td>
-		<!-- <td> <input type="submit" value="Importer pp" name="ImportPic"> </td> -->
+		<!-- <td> <input type="submit" value="Importer pp" name="ImportPic"> </td> 
 	</tr>
 	<tr>
 		<td> Importer une photo de fond : </td>
 	 	<td> <input type="file" id="newPhotoFond" name="newPhotoFond" > </td>
 		<!-- <td> <input type="submit" value="Importer photo mur" name="ImportBackground" accept="image/png, image/jpeg, image/jpg"> </td> -->
-	</tr>
+	</tr> 
 	<tr>
 			<td colspan="2" align="center">
 			<input type="submit" name="Inscription"></td>
 		</tr>
 </table>
 </form>
-
-
-
-</html>
-
