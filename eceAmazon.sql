@@ -1,4 +1,4 @@
-
+﻿
 CREATE TABLE Acheteur(
 Login varchar(255) primary key not null,
 Nom varchar(255) not null,
@@ -20,7 +20,7 @@ Nom varchar(255) not null,
 Password varchar(255) not null,
 Photo varchar(255) not null,
 imageFond varchar(255) not null
-)
+);
 
 insert into Vendeur values ("julien.delgay@edu.ece.fr", "Julien", "JulienD1234", "photoJulienD.jpg", "photoImageFondJulienD.jpg");
 insert into Vendeur values ("raphael.daici@edu.ece.fr", "Raphael", "Raph1234", "photoRaph.jpg", "photoImageFondRaph.jpg");
