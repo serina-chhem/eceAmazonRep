@@ -4,10 +4,11 @@
 	<div class="titre">
 		<h1>Administration - Connexion</h1>
 	</div>
+</header>
 	<div class="retour">
 		<a href="../index.php">Retour site</a>
 	</div>
-</header>
+
 <div class="texte">
 	<form action="" method="POST">
 		<h3>Identifiant :</h3><input type="text" name="username"/><br/><br/>

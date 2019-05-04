@@ -1,7 +1,7 @@
 <?php
 require_once ('includes/header.php');
 $database = "eceAmazon"; 
-$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 $db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 if($db_found)
 {
@@ -12,29 +12,33 @@ if($db_found)
 		$result = mysqli_query($db_handle, $sql);
 		$data = mysqli_fetch_assoc($result);
 		$description=$data["description"];
-		$description_finale=wordwrap($description,20,'<br />',false);
+		$description_finale=wordwrap($description,200,'<br />',false);
 		?>
 		<br>
-		<div style="text-align: center;">
-			<img src="admin/imgs/<?php echo $data["title"];?>.jpg">
+		<div class="texte-2" style="text-align: center;">
+			<img src="imgs/<?php echo $data["title"];?>.jpg">
 			<h1><?php echo $data["title"];?></h1>
+			<h2><?php echo $data["price"];?> EUR</h2>
 			<h5><?php echo $description_finale;?></h5>
+			<a href="panier.php"><h3>Ajouter au panier</h3></a>
+			<a href="livres.php"><h4>Retour</h4></a>
 		</div><br>
 		<?php
 	}
 	else
 	{	
-		$sql = "SELECT * from products WHERE category='livres'";
+		?><div class="texte-2"><h1>Bienvenue dans la catégorie Livres</h1></div><?php
+		$sql = "SELECT * from products WHERE category='Livres'";
 		$result = mysqli_query($db_handle, $sql);
 		while($data = mysqli_fetch_assoc($result))
 		{
-			$length=50;
+			$length=200;
 			$description=$data["description"];
 			$new_description=substr($description,0,$length)."...";
-			$description_finale=wordwrap($new_description,20,'<br />',false);
+			$description_finale=wordwrap($new_description,75,'<br />',false);
 			?>
 			<br><br>
-			<a href="?show=<?php echo $data["title"];?>"><img src="admin/imgs/<?php echo $data["title"];?>.jpg"></a>
+			<a href="?show=<?php echo $data["title"];?>"><img src="imgs/<?php echo $data["title"];?>.jpg"></a>
 			<div class="texte-2">
 				<a href="?show=<?php echo $data["title"];?>"><h2><?php echo $data["title"];?></h2></a>
 			</div>

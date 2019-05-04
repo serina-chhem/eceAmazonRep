@@ -11,10 +11,11 @@ session_start();
 	<div class="titre"> 
 		<h1>Bienvenue dans l'espace vente</h1>
 	</div>
+</header>
 	<div class="retour">
 		<a href="index.php">Retour site</a>
 	</div>
-</header>
+
 <?php
 // if($_GET['action']=='connexion'){
 	if (isset($_POST['Identifier'])){
@@ -23,7 +24,7 @@ session_start();
 
 $database = "eceAmazon"; 
 
-$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 
 $db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
@@ -88,7 +89,7 @@ if (isset($_POST['Inscription'])){
 		
 	$database = "eceAmazon"; 
 
-	$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+	$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 
 	$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 

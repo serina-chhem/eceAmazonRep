@@ -1,10 +1,26 @@
-header h1{	font-family: Segoe UI, sans-serif;}
+header
+{
+	background-color: #228B22;
+	font-family: Segoe UI, sans-serif;
+	text-align: center;
+}
+
+header h1
+{	
+	font-family: Segoe UI, sans-serif;
+}
+
+body
+{
+	/*background-image: linear-gradient(60deg, #FFFFE0, #F0E68C);*/
+	background-color: white;
+}
 
 .titre
 {
 	padding: 5px;
 	text-align: center;
-	background-color: #007179;
+	background-color: #228B22;;
 	color: white;
 }
 
@@ -13,7 +29,7 @@ header h1{	font-family: Segoe UI, sans-serif;}
 
 .texte a{text-decoration: none;}
 
-.texte h3{color: #007179;}
+.texte h3{color: #000080;}
 
 .texte h4{color: red;}
 
@@ -23,25 +39,25 @@ header h1{	font-family: Segoe UI, sans-serif;}
 
 .texte-2 a{text-decoration: none;}
 
-.texte-2 h2{color: #007179;}
+.texte-2 h2{color: #000080;}
 
 .texte-2 h3{color: black;}
 
-.texte-2 h4{color: #007179;}
+.texte-2 h4{color: #000080;}
 
 .texte-2 h5{color: black;}
 
 .texte-3{	text-align: left;
 			font-family: Segoe UI, sans-serif;}
 
-.texte-3 h2{color: #007179;}
+.texte-3 h2{color: #000080;}
 
-.texte-3 h3{color: #007179;}
+.texte-3 h3{color: #000080;}
 
-.texte-3 h4{color: #007179;}
+.texte-3 h4{color: #000080;}
 
 .bouton-case{
-	background-color: #007179;
+	background-color: #1E90FF;
 	margin: 10 auto;
 	padding: 1px;
 	width: 330px;
@@ -55,7 +71,7 @@ header h1{	font-family: Segoe UI, sans-serif;}
 .bouton-mot a{
 	text-decoration: none;
 	font-family: Segoe UI, sans-serif;
-	color: #007179;}
+	color: #000080;}
 
 .retour{
 	background-color: white;
@@ -67,7 +83,7 @@ header h1{	font-family: Segoe UI, sans-serif;}
 
 .retour a{
 	text-decoration: none;
-	color: #007179;}
+	color: #000080;}
 
 .bloc {
     padding: 0px;
@@ -88,9 +104,9 @@ header h1{	font-family: Segoe UI, sans-serif;}
     text-align: left;
 	font-family: Segoe UI, sans-serif;}
 
-.bloc-2 h3{color: #007179;}
+.bloc-2 h3{color: #000080;}
 
-.bloc-2 h4{color: #007179;}
+.bloc-2 h4{color: #000080;}
 
 #menu {
     padding: 0px;
@@ -101,7 +117,7 @@ header h1{	font-family: Segoe UI, sans-serif;}
 #menu li {
     display: inline-block;
 	padding: 10px;
-	width: 110px;
+	width: 125px;
 	text-align: center;
 	background-color: white;}
 
@@ -109,7 +125,7 @@ header h1{	font-family: Segoe UI, sans-serif;}
 #menu li a {
     text-decoration: none;
     display: block;
-	color: #007179;}
+	color: #228B22;;}
 
 /* Liste déroulante */
 #menu ul {
@@ -125,7 +141,7 @@ header h1{	font-family: Segoe UI, sans-serif;}
     display: inherit;
 	margin: 0px -10px;
 	padding: 10px;
-	width: 110px;
+	width: 125px;
 	text-align: left;
 	background-color: white;}
 
@@ -133,11 +149,11 @@ header h1{	font-family: Segoe UI, sans-serif;}
 #menu ul li a {
     text-decoration: none;
     display: block;
-	color: #007179;}
+	color: #228B22;}
 
 /* La souris survolle l'onglet */
 #menu li:hover {
-	background-color: #007179;}
+	background-color: #228B22;}
 
 #menu li:hover a{
 	color: white;}
@@ -149,10 +165,10 @@ header h1{	font-family: Segoe UI, sans-serif;}
    	background-color: white;}
 
 #menu li:hover ul li a{
-    color: #007179;}
+    color: #228B22;}
 
 #menu li:hover ul li:hover{
-   	background-color: #007179;}
+   	background-color: #228B22;}
 
 #menu li:hover ul li:hover a{
     color: white;}
@@ -162,7 +178,7 @@ header h1{	font-family: Segoe UI, sans-serif;}
 .sidebar
 {
 	margin-top: 30px;
-	background-color: #007179;
+	background-color: #228B22;
 	float: right;
 	width: 351px;
 	height: 330px;
@@ -179,7 +195,7 @@ header h1{	font-family: Segoe UI, sans-serif;}
 /* Pied de page */
 footer
 {
-	background-color: #007179;
+	background-color: #228B22;
 	font-family: Segoe UI, sans-serif;
 	position: relative;
 	bottom:0;

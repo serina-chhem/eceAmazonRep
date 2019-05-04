@@ -11,17 +11,18 @@
 	<div class="titre"> 
 		<h1>Se Connecter</h1>
 	</div>
+</header>
 	<div class="retour">
 		<a href="index.php">Retour site</a>
 	</div>
-</header>
+
 <?php
 // if($_GET['action']=='connexion'){
 if (isset($_POST['Identifier'])){
 	$identifiant = isset($_POST["email"])? $_POST["email"] : "";
 	$pass = isset($_POST["password"])? $_POST["password"] : "";
 	$database = "eceAmazon"; 
-	$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+	$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 	$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 	if($db_found){
 		$sql = "SELECT * from Acheteur where Login = '$identifiant' and Password = '$pass' ";
@@ -30,10 +31,18 @@ if (isset($_POST['Identifier'])){
 		$data = mysqli_fetch_assoc($result);
 //	){
 		if ($data['Login'] == $identifiant && $data['Password'] == $pass){
-			echo "Connexion établie ! Bienvenue ".$data['Nom'].'<br>';
+			session_start();
+			$_SESSION['email']= $identifiant;
+			$_SESSION['password']= $pass;
+
+			header("Location: livresAcheteur.php");
+			exit;
 		}
 		else if ($data['Login'] != $identifiant || $data['Password'] != $pass){
-			?><div class="texte"><h4><?php echo "Identifiant ou mot de passe incorrect";?></h4></div><?php
+			echo '<body onLoad="alert(\'Membre non reconnu...\')">';
+			echo '<meta http-equiv="refresh" content="0;URL=index.php">';
+			?>
+			<div class="texte"><h4><?php echo "Identifiant ou mot de passe incorrect";?></h4></div><?php
 		}		
 	// }
 	}
@@ -49,7 +58,7 @@ if (isset($_POST['Identifier'])){
 		<table class="bloc-2">
 			<tr>
 				<td><h3>Email : </h3></td>
-				<td><input type="text" id="email" name="email"></td>
+				<td><input type="text"  id="email" name="email"></td>
 			</tr>
 			<tr>
 				<td><h3>Mot de passe : </h3></td>
@@ -78,13 +87,13 @@ if (isset($_POST['Identifier'])){
 		$newCodeCarte = isset($_POST["newCodeCarte"])? $_POST["newCodeCarte"] : "";
 		$newAdresse = isset($_POST["newAddress"])? $_POST["newAddress"] : "";
 		if ($newIdentifiant && $newPass && $newNom && $newNumCarte && $newNomCarte && $newDateExp && $newCodeCarte && $newAdresse){
-			echo "echho";
+		
 			$database = "eceAmazon"; 
-			$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+			$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 			$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 			if ($db_found){
-				echo "echoooooooo";
-				$sql = "INSERT INTO Acheteur VALUES('$newIdentifiant' ,'$newNom','$newPass','$newNumCarte', '$newNomCarte', '$newDateExp', '$newCodeCarte', '$newAddress')";
+			
+				$sql = "INSERT INTO Acheteur VALUES('$newIdentifiant' ,'$newNom','$newPass','$newNumCarte', '$newNomCarte', '$newDateExp', '$newCodeCarte', '$newAdresse')";
 //mysql_query($sql) or die ("Gros fail");
 				$result1 = mysqli_query($db_handle, $sql) or die ("Gros fail");
 // $data1 = mysqli_fetch_assoc($result1);
@@ -117,7 +126,7 @@ if (isset($_POST['Identifier'])){
 			</tr>
 			<tr>
 				<td><h4>Entrez votre numero de carte : </h4></td>
-				<td> <input type="text" id="newNumCarte" name="newNumCarte"> </td>
+				<td> <input type="number"  min="1" maxlength = "7" placeholder="7 chiffres" id="newNumCarte" name="newNumCarte"> </td>
 			</tr>
 			<tr>
 				<td><h4>Nom figurant sur la carte  : </h4></td>
@@ -125,11 +134,11 @@ if (isset($_POST['Identifier'])){
 			</tr>
 			<tr>
 				<td><h4>Date d'expiration de la carte  : </h4></td>
-				<td> <input type="text" id="newDateExp" name="newDateExp"> </td>
+				<td> <input type="date" id="newDateExp" name="newDateExp"> </td>
 			</tr>
 			<tr>
 				<td><h4>Code de la carte : </h4></td>
-				<td> <input type="text" id="newCodeCarte" name="newCodeCarte"> </td>
+				<td> <input type="number"  min="1" maxlength = "4" placeholder="4 chiffres" id="newCodeCarte" name="newCodeCarte"> </td>
 			</tr>
 			<tr>
 				<td><h4>Adresse (rue) : </h4></td>

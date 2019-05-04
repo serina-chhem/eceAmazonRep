@@ -7,10 +7,11 @@ session_start();
 	<div class="titre">
 		<h1>Bienvenue sur la session <?php echo $_SESSION['pseudo']; ?></h1>
 	</div>
+</header>
 	<div class="retour">
 		<a href="index.php">Retour site</a>
 	</div>
-</header>
+
 <div class="bouton-case">
 	<h3><a href="?action=add">Ajouter un produit</a><h3>
 </div>
@@ -83,7 +84,7 @@ if (isset($_SESSION['pseudo']))
  				if($title&&$description&&$price&&$category) /*si tous les champs sont remplis, alors requete pour envoyer les infos dans la bdd*/
  				{      
  					$database = "eceAmazon"; 
- 					$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+ 					$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
  					$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
  					if($db_found)
  					{
@@ -114,7 +115,7 @@ if (isset($_SESSION['pseudo']))
 					<select name="category">
 						<?php 
 						$database = "eceAmazon"; 
-						$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+						$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 						$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 						if($db_found)
 						{
@@ -142,7 +143,7 @@ if (isset($_SESSION['pseudo']))
 		else if($_GET['action']=='modifyanddelete') /*redirige sur une page affichant les produits et les options permettant de modifier ou supprimer un produit*/
 		{    
 			$database = "eceAmazon"; 
-			$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+			$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 			$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 			if($db_found)
 			{
@@ -169,7 +170,7 @@ if (isset($_SESSION['pseudo']))
 		else if($_GET['action']=='modify') /*Modifier un produit de la bdd*/
 		{     
 			$database = "eceAmazon"; 
-			$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+			$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 			$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 			if($db_found)
 			{
@@ -180,7 +181,7 @@ if (isset($_SESSION['pseudo']))
 			}
 			?>
 			<div class="texte"><h4>
-				<form action="" method="post">
+				<form action="" method="post" enctype="multipart/form-data">
 					<h3>Nom du produit :</h3><input value="<?php echo $data["title"];?>" type="text" name="title">
 					<h3>Desciption :</h3><textarea name="description"><?php echo $data["description"];?>  </textarea>
 					<h3>Prix :</h3><input value="<?php echo $data["price"];?>" name="price"><br><br>
@@ -263,7 +264,7 @@ if (isset($_SESSION['pseudo']))
 					echo 'Veuillez rentrer une image';
 				}
 				$database = "eceAmazon"; 
-				$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+				$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 				$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 				if($db_found)
 				{
@@ -281,7 +282,7 @@ if (isset($_SESSION['pseudo']))
 		else if($_GET['action']=='delete')		/*Supprimer un produit du site*/
 		{         
 			$database = "eceAmazon"; 
-			$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+			$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 			$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 			if($db_found)
 			{

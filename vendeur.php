@@ -81,7 +81,7 @@ if (isset($_SESSION['pseudo'])) {
 					$database = "eceAmazon"; 
 
 
-					$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+					$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 
 					$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
@@ -118,7 +118,7 @@ if (isset($_SESSION['pseudo'])) {
 					$database = "eceAmazon"; 
 
 
-					$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+					$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 
 					$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
@@ -165,7 +165,7 @@ if (isset($_SESSION['pseudo'])) {
 			$database = "eceAmazon"; 
 
 
-			$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+			$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 
 			$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
@@ -201,7 +201,7 @@ if (isset($_SESSION['pseudo'])) {
 			$database = "eceAmazon"; 
 
 
-			$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+			$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 
 			$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
@@ -225,7 +225,7 @@ if (isset($_SESSION['pseudo'])) {
 
 
 			?>
-			<form action="" method="post">
+			<form action="" method="post" enctype="multipart/form-data">
 				<h3>Nom du produit :</h3><input value="<?php echo $data["title"];?>"" type="text" name="title">
 				<h3>Desciption :</h3><textarea name="description"><?php echo $data["description"];?>  </textarea>
 				<h3>Prix :</h3><input value="<?php echo $data["price"];?>" name="price"><br><br>
@@ -236,7 +236,7 @@ if (isset($_SESSION['pseudo'])) {
 					$database = "eceAmazon"; 
 
 
-					$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+					$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 
 					$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
@@ -330,7 +330,7 @@ if (isset($_SESSION['pseudo'])) {
 				$database = "eceAmazon"; 
 
 
-				$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+				$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 
 				$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
@@ -361,7 +361,7 @@ if (isset($_SESSION['pseudo'])) {
 			$database = "eceAmazon"; 
 
 
-			$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
+			$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 
 			$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
