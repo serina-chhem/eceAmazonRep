@@ -97,7 +97,13 @@ if (isset($_POST['Identifier'])){
 //mysql_query($sql) or die ("Gros fail");
 				$result1 = mysqli_query($db_handle, $sql) or die ("Gros fail");
 // $data1 = mysqli_fetch_assoc($result1);
-				echo "Done";
+				?>
+				<div class="texte"><h4>
+				<?php
+				echo "Informations Enregistrées";
+				?>
+				</h4></div>
+				<?php
 			}
 			else {
 				echo "Base de données non trouvée";

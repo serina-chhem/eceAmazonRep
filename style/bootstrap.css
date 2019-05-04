@@ -56,6 +56,11 @@ body
 
 .texte-3 h4{color: #000080;}
 
+.texte-4{	text-align: left;
+			font-family: Segoe UI, sans-serif;}
+
+.texte-4 h4{color: red;}
+
 .bouton-case{
 	background-color: #1E90FF;
 	margin: 10 auto;

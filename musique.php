@@ -20,7 +20,10 @@ if($db_found)
 			<h1><?php echo $data["title"];?></h1>
 			<h2><?php echo $data["price"];?> EUR</h2>
 			<h5><?php echo $description_finale;?></h5>
-			<a href="panier.php"><h4>Ajouter au panier</h4></a>
+			<?php if($data["stock"]!=0){?>
+					<h5>Stock : <?php echo $data["stock"];?></h5>
+					<a href="panier.php"><h3>Ajouter au panier</h3></a> <?php
+				}else{echo'<h5 style="color:red;"> Produit victime de son succès<h5>';}?>
 			<a href="musique.php"><h4>Retour</h4></a>
 		</div><br>
 		<?php
@@ -49,8 +52,14 @@ if($db_found)
 				<h3><?php echo $data["price"];?> EUR</h3>
 			</div>
 			<div class="texte-2">
-				<a href=""><h4>Ajouter au panier</h4></a>
-			</div>
+					<h5>Stock : <?php echo $data["stock"];?></h5>
+				</div>
+			<div class="texte-2">
+					<?php if($data["stock"]!=0){?>
+					<h5>Stock : <?php echo $data["stock"];?></h5>
+					<a href="monCompte.php"><h3>Ajouter au panier</h3></a> <?php
+				}else{echo'<h5 style="color:red;"> Produit victime de son succès<h5>';}?>
+				</div>
 			<br/><br/><br/>
 			<?php 
 		}

@@ -31,6 +31,7 @@ if (isset($_SESSION['username']))
 			?><div class="texte"><h4><?php
 			if(isset($_POST['submit']))  /* Récupération des infos du formulaire pour ajouter un produit */  
 			{           
+				$stock=$_POST['stock'];
 				$title=$_POST['title'];
 				$description=$_POST['description'];
 				$price=$_POST['price'];
@@ -84,14 +85,14 @@ if (isset($_SESSION['username']))
 				{
 					echo '(Image manquante)<br>';
 				}
- 				if($title&&$description&&$price&&$category) /*si tous les champs sont remplis, alors requete pour envoyer les infos dans la bdd*/
+ 				if($title&&$description&&$price&&$category&&$stock) /*si tous les champs sont remplis, alors requete pour envoyer les infos dans la bdd*/
  				{      
  					$database = "eceAmazon"; 
  					$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
  					$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
  					if($db_found)
  					{
-						$sql = "INSERT INTO products VALUES('','$title','$description','$price','$category','$vendeur')";
+						$sql = "INSERT INTO products VALUES('','$title','$description','$price','$category','$vendeur','$stock')";
 						$result = mysqli_query($db_handle, $sql);
 					}
 					else
@@ -137,7 +138,8 @@ if (isset($_SESSION['username']))
 						}
 						mysqli_close($db_handle);
 						?>
-					</select><br><br>
+					</select><br>
+					<h3>Stock :</h3><input type="text" name="stock"><br><br>
 					<input type="submit" name="submit"/>
 				</form>
 			</div>
@@ -187,7 +189,8 @@ if (isset($_SESSION['username']))
 					<h3>Nom du produit :</h3><input value="<?php echo $data["title"];?>" type="text" name="title">
 					<h3>Desciption :</h3><textarea name="description"><?php echo $data["description"];?>  </textarea>
 					<h3>Prix :</h3><input value="<?php echo $data["price"];?>" name="price"><br><br>
-					<input type="file" name="img"><br><br><br><br>
+					<input type="file" name="img"><br><br>
+					<h3>Stock :</h3><input type="text" value="<?php echo $data["stock"];?>" name="stock"><br><br>
 					<h3>Categorie :</h3><select name="category">
 					<?php 
 					$database = "eceAmazon"; 
@@ -208,13 +211,15 @@ if (isset($_SESSION['username']))
 					}
 					mysqli_close($db_handle);
 					?>
-					</select><br><br>
+					</select><br>
+					
 					<input type="submit" name="submit" value="Modifier" />
 				</form>
 			</h4></div>
 			<?php
 			if (isset($_POST['submit'])) 
 			{
+				$stock=$_POST['stock'];
 				$title=$_POST['title'];
 				$description=$_POST['description'];
 				$price=$_POST['price'];
@@ -270,7 +275,7 @@ if (isset($_SESSION['username']))
 				$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 				if($db_found)
 				{
-					$update="UPDATE products SET title='$title',description='$description',price='$price',category='$category' WHERE id=$id";
+					$update="UPDATE products SET title='$title',description='$description',price='$price',category='$category',stock='$stock' WHERE id=$id";
 					$result2 = mysqli_query($db_handle, $update);
 				}
 				else 

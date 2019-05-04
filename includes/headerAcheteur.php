@@ -10,7 +10,7 @@ session_start();
 	</head>
 	<header>
 		<div class="titre">
-			<h1>ECE Amazon</h1>
+			<h1><a href="index.php"><img align="left" src="logo.png" width="60" height="45" ></a> ECE Amazon</h1>
 		</div>
 	</header>
 	<body>
@@ -29,6 +29,7 @@ session_start();
 			<li><a href="monCompteAcheteur.php"><img src="monCompte.png" width="15" height="15"> Mon Compte</a></li>
 			<li><a href="panier.php"><img src="panier.png" width="15" height="15"> Panier</a></li>
 			<li><a href="admin/indexAdmin.php"><img src="cadenas.png" width="15" height="15"> Admin</a></li>
+			<li><a href="logoutAcheteur.php"><img src="deconnecter.png" width="15" height="15"> Deconnexion</a></li>
 		</ul>
 	</body>
 </html>

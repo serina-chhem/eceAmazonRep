@@ -10,7 +10,7 @@ session_start();
 	</head>
 	<header>
 		<div class="titre">
-			<h1>ECE Amazon</h1>
+			<h1><a href="index.php"><img align="left" src="logo.png" width="60" height="45" ></a> ECE Amazon</h1>
 		</div>
 	</header>
 	<body>

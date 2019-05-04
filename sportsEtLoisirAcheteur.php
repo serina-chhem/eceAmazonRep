@@ -1,6 +1,6 @@
 <?php
 require_once ('includes/headerAcheteur.php');
-session_start();
+/*session_start();*/
 $database = "eceAmazon"; 
 $db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
 $db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
@@ -21,7 +21,16 @@ if($db_found)
 			<h1><?php echo $data["title"];?></h1>
 			<h2><?php echo $data["price"];?> EUR</h2>
 			<h5><?php echo $description_finale;?></h5>
-			<a href="panier.php"><h4>Ajouter au panier</h4></a>
+			<?php if($data["stock"]!=0){?>
+					<h5>Stock : <?php echo $data["stock"];?></h5>
+					<a href="panier.php"><h3>Ajouter au panier</h3></a>
+					<a href="?action=acheterUnClick"><h3>Acheter en un click</h3></a> <?php
+					if(isset($_GET['action'])){
+					if($_GET['action']=='acheterUnClick')
+					{
+						header("Location: verificationCarteAcheteur.php");	
+					}}
+				}else{echo'<h5 style="color:red;"> Produit victime de son succès<h5>';}?>
 			<a href="sportsEtLoisirAcheteur.php"><h4>Retour</h4></a>
 		</div><br>
 		<?php
@@ -50,27 +59,24 @@ if($db_found)
 				<h3><?php echo $data["price"];?> EUR</h3>
 			</div>
 			<div class="texte-2">
-				<a href=""><h4>Ajouter au panier</h4></a>
-			</div>
-			<div class="texte-2">
-
-			<a href="?action=acheterUnClick"><h4>Acheter en un click</h4></a>
-			<?php 
-
-			if($_GET['action']=='acheterUnClick')
-			{
-				header("Location: verificationCarteAcheteur.php");	
-			}
-			 ?>
-			</div>
+					<?php if($data["stock"]!=0){?>
+					<h5>Stock : <?php echo $data["stock"];?></h5>
+					<a href="panier.php"><h3>Ajouter au panier</h3></a> 
+					<a href="?action=acheterUnClick"><h4>Acheter en un click</h4></a>
+					<?php 
+					if(isset($_GET['action'])){
+					if($_GET['action']=='acheterUnClick')
+					{
+						header("Location: verificationCarteAcheteur.php");	
+					}}
+					
+				}else{echo'<h5 style="color:red;"> Produit victime de son succès<h5>';}?>
+				</div>
 			<br/><br/><br/>
 			<?php 
 		}
 	}
-	/*else {
-		echo "Database not found";
-	}*/
-	echo '<a href="logoutAcheteur.php">Déconnection</a>'.'<br>';
+
 	mysqli_close($db_handle);
 }
 require_once ('includes/footer.php');
