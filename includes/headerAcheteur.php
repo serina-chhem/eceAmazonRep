@@ -24,7 +24,7 @@ session_start();
 					<li><a href="sportsEtLoisirAcheteur.php"><img src="sportetloisir.png" width="15" height="15"> Sports et Loisir</a></li>
 				</ul>
 			</li>
-			<li><a href="ventesFlash.php"><img src="eclair.png" width="15" height="15"> Ventes Flash</a></li>
+			<li><a href="ventesFlashAcheteur.php"><img src="eclair.png" width="15" height="15"> Ventes Flash</a></li>
 			<li><a href="indexVendeur.php"><img src="vendre.png" width="15" height="15"> Vendre</a></li>
 			<li><a href="monCompteAcheteur.php"><img src="monCompte.png" width="15" height="15"> Mon Compte</a></li>
 			<li><a href="panier.php"><img src="panier.png" width="15" height="15"> Panier</a></li>

@@ -21,7 +21,10 @@ if($db_found)
 			<h1><?php echo $data["title"];?></h1>
 			<h2><?php echo $data["price"];?> EUR</h2>
 			<h5><?php echo $description_finale;?></h5>
-			<?php if($data["stock"]!=0){?>
+			<?php $_SESSION['id']=$data["id"];
+				$_SESSION['stock']=$data["stock"];
+				$_SESSION['vente']=$data["vente"];
+				if($data["stock"]!=0){?>
 					<h5>Stock : <?php echo $data["stock"];?></h5>
 					<a href="panier.php"><h3>Ajouter au panier</h3></a>
 					<a href="?action=acheterUnClick"><h3>Acheter en un click</h3></a> <?php
@@ -62,7 +65,7 @@ if($db_found)
 					<?php if($data["stock"]!=0){?>
 					<h5>Stock : <?php echo $data["stock"];?></h5>
 					<a href="panier.php"><h3>Ajouter au panier</h3></a> 
-					<a href="?action=acheterUnClick"><h4>Acheter en un click</h4></a>
+					
 					<?php 
 					if(isset($_GET['action'])){
 					if($_GET['action']=='acheterUnClick')

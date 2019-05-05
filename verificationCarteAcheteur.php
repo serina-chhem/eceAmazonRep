@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php 
+session_start();
+?>
++<!DOCTYPE html>
 <html>
 <head>
 	<title> Mon compte Client</title>
@@ -13,17 +16,13 @@
 	</div>
 </header>
 
-<!-- Si l'acheteur ne s'est pas encore connecter, redirection vers la page connexion ; si acheteur déjà connecté, on verifie juste ses coordonnées bancaires dans le formulaires -->
-
-
-<!-- Cas ou l'acheteur est deja connecté : Penser a verifier la connexion de l'utilisateur -->
-
 <?php 
-session_start();
-if (isset($_SESSION['email']) && isset($_SESSION['password'])){
 
-	/*echo "Connexion établie ! Bienvenue ".'<br>';*/
+
+if (isset($_SESSION['email']) && isset($_SESSION['password'])&& isset($_SESSION['id'])&& isset($_SESSION['stock'])&& isset($_SESSION['vente'])){
+	 
 	?>
+	
 	<div class="bloc-2"><h3>
 	<?php
 
@@ -50,7 +49,8 @@ if (isset($_SESSION['email']) && isset($_SESSION['password'])){
 		$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 
 
-		if ($db_found){
+		if ($db_found)
+		{
 
 			$sql = "SELECT * from acheteur where Login = '$identifiant' and numeroCarte = ' $cardNum' and nomCarte = '$cardNom ' and dateExpiration = '$dateExpi' and codeCarte = '$crypto' and Adresse = '$address'";
 			$result = mysqli_query($db_handle, $sql) or die ("Gros fail");
@@ -62,14 +62,22 @@ if (isset($_SESSION['email']) && isset($_SESSION['password'])){
 				echo " Merci ".$data['Nom'].' ! ';
 				echo "Vous allez recevoir votre commande (et peut être un mail de confirmation?) d'ici quelques jours à l'adresse : " .$data['Adresse'].'<br>';
 				?></h4></div><?php
+
+				$id=$_SESSION['id'];
+				$newStock=$_SESSION['stock']-1;
+				$newVente=$_SESSION['vente']+1;
+				$sql="UPDATE products SET stock='$newStock',vente='$newVente' WHERE id='$id'";
+				$result = mysqli_query($db_handle, $sql);
 			} 
-			else {
+			else 
+			{
 				?><div class="texte-4"><h4><?php
 				echo "Vérifiez vos informations. ". '<br>';
 				?></h4></div><?php
 			}
-
+		
 		}
+		
 
 		else {
 			echo "Database not found";
@@ -79,6 +87,9 @@ if (isset($_SESSION['email']) && isset($_SESSION['password'])){
 
 	}
 }
+
+
+
 else 
 {
 	
@@ -90,7 +101,7 @@ else
 	<table>
 		<tr>
 			<td> Identifiant : </td>
-			<td><input type="text" id="email" name="email"></td>
+			<td><input type="email" id="email" name="email"></td>
 		</tr>
 		<tr>
 			<td> Nom figurant carte : </td>

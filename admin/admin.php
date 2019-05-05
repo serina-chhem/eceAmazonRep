@@ -31,6 +31,7 @@ if (isset($_SESSION['username']))
 			?><div class="texte"><h4><?php
 			if(isset($_POST['submit']))  /* Récupération des infos du formulaire pour ajouter un produit */  
 			{           
+				
 				$stock=$_POST['stock'];
 				$title=$_POST['title'];
 				$description=$_POST['description'];
@@ -92,7 +93,7 @@ if (isset($_SESSION['username']))
  					$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
  					if($db_found)
  					{
-						$sql = "INSERT INTO products VALUES('','$title','$description','$price','$category','$vendeur','$stock')";
+						$sql = "INSERT INTO products VALUES('','$title','$description','$price','$category','$vendeur','$stock','')";
 						$result = mysqli_query($db_handle, $sql);
 					}
 					else

@@ -89,7 +89,7 @@ if (isset($_SESSION['pseudo']))
  					$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
  					if($db_found)
  					{
-						$sql = "INSERT INTO products VALUES('','$title','$description','$price','$category','$vendeur','$stock')";
+						$sql = "INSERT INTO products VALUES('','$title','$description','$price','$category','$vendeur','$stock','')";
 						$result = mysqli_query($db_handle, $sql);
 					}
 					else
@@ -192,7 +192,7 @@ if (isset($_SESSION['pseudo']))
 					<h3>Categorie :</h3><select name="category">
 					<?php 
 					$database = "eceAmazon"; 
-					$db_handle = mysqli_connect('localhost', 'root', 'root') or die ("erreur de connexion");
+					$db_handle = mysqli_connect('localhost', 'root', '') or die ("erreur de connexion");
 					$db_found = mysqli_select_db($db_handle, $database) or die ("erreur de selection");
 					if($db_found){
 						$sql = "SELECT * from category";

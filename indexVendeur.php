@@ -139,14 +139,7 @@ else {
 			<td> <input type="text" id="newPseudo" name="newPseudo"> </td>
 		</tr>
 		<tr>
-			<!--<td> Importer une photo de profil</td>
-			<td> <input type="file" name="newPic" id="newPic" accept="image/png, image/jpeg, image/jpg"> </td>
-			 <td> <input type="submit" value="Importer pp" name="ImportPic"> </td> 
-		</tr>
-		<tr>
-			<td> Importer une photo de fond : </td>
-		 	<td> <input type="file" id="newPhotoFond" name="newPhotoFond" > </td>
-			 <td> <input type="submit" value="Importer photo mur" name="ImportBackground" accept="image/png, image/jpeg, image/jpg"> </td> -->
+
 		</tr> 
 		<tr>
 			<td colspan="2" align="center">

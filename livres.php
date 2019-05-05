@@ -27,7 +27,7 @@ require_once ('includes/header.php');
 				<h5><?php echo $description_finale;?></h5>
 				<?php if($data["stock"]!=0){?>
 					<h5>Stock : <?php echo $data["stock"];?></h5>
-					<a href="panier.php"><h3>Ajouter au panier</h3></a> <?php
+					<a href="monCompte.php"><h3>Ajouter au panier</h3></a> <?php
 				}else{echo'<h5 style="color:red;"> Produit victime de son succès<h5>';}?>
 				<a href="livres.php"><h4>Retour</h4></a>
 			</div><br>

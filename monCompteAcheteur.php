@@ -48,11 +48,11 @@
 				}	
 
 			}
-	else
-	{
-		echo "Database not found";
-	}
-	mysqli_close($db_handle);
+			else
+			{
+				echo "Database not found";
+			}
+			mysqli_close($db_handle);
 
 	}
 
